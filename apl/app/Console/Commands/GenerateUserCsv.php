@@ -14,7 +14,7 @@ class GenerateUserCsv extends Command
      *
      * @var string
      */
-    protected $signature = 'generatecsv:users {recordcount} {filename?} {--with-header}';
+    protected $signature = 'generatecsv:users {recordcount} {filename?} {--with-headers}';
 
     /**
      * The console command description.
@@ -43,6 +43,12 @@ class GenerateUserCsv extends Command
         $faker = \Faker\Factory::create();
 
         $lines = array();
+
+        if ($this->option("with-headers"))
+        {
+            array_push($lines, str_putcsv(["name", "email", "phone", "password", "deleted"]));   
+        }
+
         for ($i = 0; $i < $this->argument('recordcount'); $i++)
         {
             $sampleUser = $this->createSampleUser($faker);
