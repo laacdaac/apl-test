@@ -3,7 +3,7 @@
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
 </p>
 
-<p> The application will import a large CSV file (100k records) into a queue, where a background worker will process each individual record.</p>
+<p> The application will import a large CSV file (100k records) into a queue, where a background worker will process each individual record and updates the database.</p>
 
 ## Install
 
@@ -11,20 +11,22 @@
 
 <p>Get the source code of the application from <a href="https://github.com/laacdaac/apl-test">https://github.com/laacdaac/apl-test</a></p>
 
-<p>First, you have to set up a Homestead & VirtualBox VM environment (https://laravel.com/docs/8.x/homestead)</p>
+<p>In order to run the application in Homestead & VirtualBox VM environment follow the following steps.</p>
+<p>Set up a Homestead & VirtualBox VM environment (https://laravel.com/docs/8.x/homestead)</p>
 
-<p>From the project main directory install dependencies with required</p>
+<p>From the project main directory install dependencies required for Homestead</p>
 
 <pre>
     composer install
 </pre>
 
-<p>To generate the Homestead config file run</p>
+<p>Generate the Homestead config file with the command</p>
 
 <pre>
     php vendor/bin/homestead make
 </pre>
 
+<p>Start virtual machine with the command</p>
 <pre>
     vagrant up
 </pre>
@@ -35,7 +37,7 @@
     vagrant ssh
 </pre>
 
-<p>Navigate to the project directory code/apl and install Laravel dependencies with</p>
+<p>Navigate to the code directory code/apl and install Laravel dependencies with</p>
 <pre>
     composer install
 </pre>
@@ -57,7 +59,7 @@
 ## Usage
 
 <h3>User CSV generator</h3>
-<p>Generate users CSV file with the Laravel artisan command:</p>
+<p>Generate users CSV file with the Laravel artisan command</p>
 
 <pre>
     php artisan generatecsv:users {recordcount}
@@ -86,7 +88,8 @@
 </pre>
 
 <h3>User CSV file importer</h3>
-<p>Import the users CSV file with the Laravel artisan command:</p>
+
+<p>Import the users CSV file with the Laravel artisan command</p>
 
 <pre>
     php artisan processcsv:users {filename=users.csv} {--with-headers}
@@ -98,7 +101,7 @@
 
 <h3>Process the Queue</h3>
 
-<p>The CSV importer pushes the records into the users queue. In order to be processed you have to start Laraval workers with the command</p>
+<p>The CSV importer pushes the records into the "users" queue. In order to be processed you have to start Laraval workers with the command</p>
 
 <pre>
     php artisan queue:work --queue=users
@@ -106,8 +109,8 @@
 
 ## Run tests
 
-<p>In order to test the application navigate to the project directory "code/apl" and run</p>
-<p>Please set the correct database credentials in .env.testing file</p>
+<p>Before testing, please set the correct database credentials in .env.testing file</p>
+<p>In order to test the application navigate to the project code directory "code/apl" and run</p>
 
 <pre>
 php artisan test
