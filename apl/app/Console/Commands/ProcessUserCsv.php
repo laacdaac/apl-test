@@ -64,7 +64,7 @@ class ProcessUserCsv extends Command
                 }
                 else
                 {
-                    $this->info('The csv file ' . $this->getCsvFileName() . ' is corrupt');  
+                    $this->info('The csv file ' . $this->getCsvFileName() . ' is corrupt: '.print_r($parsedCsvLine, true));  
                     return 1; 
                 }
             }
