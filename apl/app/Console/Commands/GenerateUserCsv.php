@@ -85,7 +85,7 @@ class GenerateUserCsv extends Command
             "name" => $faker->firstName . " " . $faker->lastName,
             "email" => $faker->unique()->safeEmail,
             "phone" => $faker->phoneNumber,
-            "password" => str_replace(",", "", str_replace('"', "", $faker->password)),
+            "password" => urlencode($faker->password),
             "deleted" => $faker->randomDigit == 8 ? 1 : 0
         ];
     }
