@@ -122,6 +122,18 @@
     php artisan processcsv:users {filename=users.csv} {--with-headers}
 </pre>
 
+<pre>
+    php artisan processcsv:users users.csv
+</pre>
+
+<p>Will process the file users.csv from the storage directory (storage/app)</p>
+
+<pre>
+        php artisan processcsv:users users.csv --with-headers
+</pre>
+    
+<p>Will process the file users.csv from the storage directory (storage/app) using the first row as header information for columns</p>
+    
 <p>The filename defaults to users.csv located in the default storage directory (storage/app). You can specify arbitrary filename as the first argument of the command</p>
 
 <p>Specify the <b>--with-headers</b> option to instruct the importer that the first line of the CSV contains the column mappings</p>
