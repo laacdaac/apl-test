@@ -114,6 +114,8 @@
 
 <h3>User CSV file importer</h3>
 
+<p>You can find a sample users.csv file in the project main directory. You can copy into the Laraval storage default location (storage/app) to test the importer</p>>
+
 <p>Import the users CSV file with the Laravel artisan command</p>
 
 <pre>
