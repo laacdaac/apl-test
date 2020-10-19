@@ -5,6 +5,31 @@
 
 <p> The application will import a large CSV file (100k records) into a queue, where a background worker will process each individual record and updates the database.</p>
 
+<p>Requirements this application fullfills</p>
+
+<p>
+    <ul>
+        <li>Use Laravel Queue (your choice of queue)></li>
+        <li>Use MySQL as the destination database
+            <ul>    
+                <li>Create a DB migration to setup a Users table</li>
+                <li>Use the native Laravel timestamps</li>
+                <li>Use the SoftDelete feature</li>
+            </ul>
+        </li>
+        <li>
+            <ul>
+                <li>Write a script to create a CSV file with 100k records containing a list of users</li>
+                <li>Names, emails, passwords and phone numbers (can be fully randomized)</li>
+                <li>Include a “deleted” column, with a few records having a value set</li>
+            </ul>
+        </li>
+        <li>Create a CSV file importer, that will accept the generated CSV file and insert the records into the Queue</li>
+        <li>Create a Console Command that processes the records in the queue, and update the  database with the data.</li>
+        <li>Setup PHP Unit / Functional Tests on the importer and queue worker.</li>
+    </ul>
+</p>
+
 ## Install
 
 <p>This application requires the Laravel Framework 8.x</p>
@@ -59,7 +84,7 @@
 ## Usage
 
 <h3>User CSV generator</h3>
-<p>Generate users CSV file with the Laravel artisan command</p>
+<p>Generate users.csv file with the Laravel artisan command</p>
 
 <pre>
     php artisan generatecsv:users {recordcount}
