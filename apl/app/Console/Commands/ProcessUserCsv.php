@@ -60,11 +60,26 @@ class ProcessUserCsv extends Command
                 if (count($parsedCsvLine) == count($headerNames))
                 {
                     $data = array_combine($headerNames, $parsedCsvLine);
-                    ProcessUserRecord::dispatch($data)->onQueue('users');
+                    if (
+                        isset($data['name']) &&
+                        isset($data['email']) &&
+                        isset($data['phone']) &&
+                        isset($data['password']) &&
+                        isset($data['deleted'])
+                    )
+                    {
+                        ProcessUserRecord::dispatch($data)->onQueue('users');
+                    }
+                    else
+                    {
+                        $this->info('The csv file ' . $this->getCsvFileName() . ' has incorrect header:'."\n".print_r($parsedCsvLine, true));  
+                        return 1; 
+                    }
+                        
                 }
                 else
                 {
-                    $this->info('The csv file ' . $this->getCsvFileName() . ' is corrupt: '.print_r($parsedCsvLine, true));  
+                    $this->info('The csv file ' . $this->getCsvFileName() . ' is corrupt:'."\n".print_r($parsedCsvLine, true));  
                     return 1; 
                 }
             }

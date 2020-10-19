@@ -35,17 +35,24 @@ class ProcessUserRecord implements ShouldQueue
     public function handle()
     {
         //Create user in database or update previous
-        $user = User::withTrashed()->updateOrCreate(
-            [ "email" => $this->data["email"] ],
-            [
-                "name" => $this->data["name"], 
-                "phone" => $this->data["phone"], 
-                "password" => md5($this->data["password"])
-            ]
-        );
-        if ($this->data['deleted'])
+        if (isset($this->data['email']))
         {
-            $user->delete();
+            $user = User::withTrashed()->updateOrCreate(
+                [ "email" => $this->data["email"] ],
+                [
+                    "name" => isset($this->data["name"]) ? $this->data["name"] : "", 
+                    "phone" => isset($this->data["phone"]) ? $this->data["phone"] : "", 
+                    "password" => md5($this->data["password"])
+                ]
+            );
+            if ($this->data['deleted'])
+            {
+                $user->delete();
+            }    
+        }
+        else
+        {
+            throw new \Exception("Email field is empty");
         }
         
     }
